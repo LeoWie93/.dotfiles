@@ -1,0 +1,11 @@
+
+alias ll='ls -lah --color=auto'
+
+alias git-fu='git add . && git commit --amend --no-edit && git push origin $(git rev-parse --abbrev-ref HEAD) -f'
+alias git-fp='git fetch origin && git remote prune origin'
+alias cdd='cd ~/Downloads'
+alias cdD='cd ~/Documents'
+alias cdp='cd ~/projects'
+alias cdpk='cd ~/projects/h2g/klett'
+
+alias fs='fd --type f --hidden --exclude .git | fzf-tmux -p | xargs nvim'
