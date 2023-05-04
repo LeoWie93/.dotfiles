@@ -10,6 +10,7 @@ alias git-fu='git add . && git commit --amend --no-edit && git push origin $(git
 alias git-fp='git fetch origin && git remote prune origin'
 
 alias fs='fd --type f --hidden --exclude .git | fzf-tmux -p | xargs nvim'
+alias ds='fd --type d --maxdepth 1 | fzf-tmux -p | xargs nvim'
 
 alias vim='nvim'
 
