@@ -3,9 +3,18 @@ local lsp = require("lsp-zero")
 lsp.preset("recommended")
 
 lsp.ensure_installed({
-    'tsserver',
+    'ansiblels',
+    'bashls',
+    'dockerls',
+    'docker_compose_language_service',
     'eslint',
+    'html',
+    'jsonls',
     'lua_ls',
+    'gopls',
+    'tsserver',
+    'yamlls',
+    'lemminx'
 })
 
 local cmp = require('cmp')

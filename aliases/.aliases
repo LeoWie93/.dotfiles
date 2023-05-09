@@ -3,8 +3,11 @@ alias ll='ls -lah --color=auto'
 
 alias cdd='cd ~/Downloads'
 alias cdD='cd ~/Documents'
-alias cdp='cd ~/projects'
-alias cdpk='cd ~/projects/h2g/klett'
+alias cdh='cd ~/workspace/h2g'
+alias cdhk='cd ~/workspace/h2g/klett'
+alias cdp='cd ~/workspace/personal'
+
+alias cdnc='cd ~/.config/nvim'
 
 alias git-fu='git add . && git commit --amend --no-edit && git push origin $(git rev-parse --abbrev-ref HEAD) -f'
 alias git-fp='git fetch origin && git remote prune origin'
