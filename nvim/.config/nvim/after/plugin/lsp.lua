@@ -12,6 +12,7 @@ lsp.ensure_installed({
     'jsonls',
     'lua_ls',
     'gopls',
+    'rust_analyzer',
     'tsserver',
     'yamlls',
     'lemminx'
@@ -35,7 +36,20 @@ lsp.on_attach(function (client, bufnr)
 
     vim.keymap.set("n", "gd", function () vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function () vim.lsp.buf.hover() end, opts)
+
+    lsp.default_keymaps({buffer = bufnr})
+    lsp.buffer_autoformat()
 end)
+
+
+lsp.configure('gopls', {
+    settings = {
+        gopls = {
+            completeUnimported = true,
+            usePlaceholders = true,
+        }
+    }
+})
 
 lsp.setup()
 

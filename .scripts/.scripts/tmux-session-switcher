@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+tmux list-sessions | awk '{print $1}' | tr -d : | fzf-tmux -p | xargs tmux switch -t
+
