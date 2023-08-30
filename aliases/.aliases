@@ -3,17 +3,20 @@ alias ll='ls -lah --color=auto'
 
 alias cdd='cd ~/Downloads'
 alias cdD='cd ~/Documents'
-alias cdh='cd ~/workspace/h2g'
-alias cdhk='cd ~/workspace/h2g/klett'
-alias cdp='cd ~/workspace/personal'
+alias cdw='cd ~/work'
+alias cdp='cd ~/personal'
 
 alias cdnc='cd ~/.config/nvim'
 
+# GIT
+alias gba='git branch -a'
+alias gc='git commit'
+alias ngc='npm run commit'
 alias git-fu='git add . && git commit --amend --no-edit && git push origin $(git rev-parse --abbrev-ref HEAD) -f'
-alias git-fp='git fetch origin && git remote prune origin'
+alias git-fp='git fetch origin --prune --prune-tags && git remote prune origin'
 
-alias fs='fd --type f --hidden --exclude .git | fzf-tmux -p | xargs nvim'
-alias ds='fd --type d --maxdepth 1 | fzf-tmux -p | xargs nvim'
+alias fs='fd --type f --type l --max-depth=1 --hidden --exclude .git | fzf-tmux -p | xargs nvim'
+alias ds='fd --type d --max-depth=1 | fzf-tmux -p | xargs nvim'
 
 alias vim='nvim'
 

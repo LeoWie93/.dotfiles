@@ -1,57 +1,51 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
-# Lines configured by zsh-newuser-install
+### History
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-bindkey -v
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
+HISTSIZE=10000
+SAVEHIST=10000
+
 zstyle :compinstall filename '/home/lwi/.zshrc'
-
-autoload -Uz compinit
+autoload -Uz compinit promptinit
 compinit
-# End of lines added by compinstall
-
-### Manual Config
-#autoloading
-autoload -Uz promptinit
+promptinit
 
 #### sources
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-
 #### bindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
 
+bindkey '^I'   complete-word       # tab          | complete
+bindkey '^[[Z' autosuggest-accept  # shift + tab  | autosuggest
+
+
+bindkey -s ^a ". dir-switcher\n"
 bindkey -s ^f "tmux-session-switcher\n"
 bindkey -s ^n "tmux-session\n"
 
 #### aliases
 source $HOME/.aliases
 
-
-#### exports / tools
+## exports / tools
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion 
 
 export PATH=/home/lwi/.scripts:$PATH
 
-# go
+### go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+### phpstorm
+export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
+
+
+eval "$(starship init zsh)"
 

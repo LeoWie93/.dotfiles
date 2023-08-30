@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+dir=$(fd -H --type d --min-depth=1 --max-depth=1 --search-path ~ --search-path ~/personal --search-path ~/work | fzf-tmux -p)
+
+cd $dir
+
