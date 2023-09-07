@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+no_of_terminals=$(tmux list-sessions | wc -l)
+#IFS=$'\n'
+
+output=($(tmux list-sessions))
+output_names=($(tmux list-sessions -F\#S))
+
+echo ${no_of_terminals}
+
+k=1
+for i in "${output[@]}"; do
+	echo "$k - $i"
+	((k++))
+done
+

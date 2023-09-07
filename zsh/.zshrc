@@ -49,3 +49,7 @@ export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
 
 eval "$(starship init zsh)"
 
+if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" && $TERMINAL_EMULATOR != "JetBrains-JediTerm" ]]; then
+	tmux-chooser && exit
+fi
+
