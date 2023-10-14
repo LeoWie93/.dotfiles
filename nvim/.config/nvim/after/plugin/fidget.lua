@@ -1,4 +1,1 @@
-
-
 require('fidget').setup()
-

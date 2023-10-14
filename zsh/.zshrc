@@ -53,3 +53,10 @@ if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" && $TERMINAL_EMULATOR != "JetBrains
 	tmux-chooser && exit
 fi
 
+
+# bun completions
+[ -s "/home/lwi/.bun/_bun" ] && source "/home/lwi/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
