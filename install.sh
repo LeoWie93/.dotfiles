@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-STOW_FOLDERS=("alacritty" "aliases" "nvim" "rofi" "starship" ".scripts" "tmux" "themes" "zsh")
+STOW_FOLDERS=("alacritty" "aliases" "nvim" "rofi" "starship" ".scripts" "sway" "tmux" "themes" "zsh")
 
 # Loop through the array and handle each string
 for folder in "${STOW_FOLDERS[@]}"
