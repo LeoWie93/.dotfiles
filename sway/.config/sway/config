@@ -14,7 +14,7 @@ set $up k
 set $right l
 
 set $term alacritty
-set $menu wofi --show run
+set $menu wofi --show drun
 
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
@@ -24,6 +24,9 @@ output $laptop {
     resolution 1920x1200@90Hz
     scale 2
 }
+
+gaps inner 2
+gaps outer 2
 
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
@@ -183,22 +186,17 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
+## Audio
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && dunstify -h int:value:"$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')" -i ~/.config/dunst/assets/volume.svg -t 1000 -r 2593 "Volume: $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')%"
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && dunstify -h int:value:"$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')" -i ~/.config/dunst/assets/volume.svg -t 1000 -r 2593 "Volume: $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')%"
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && dunstify -i ~/.config/dunst/assets/$(pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes" && echo "volume-mute.svg" || echo "volume.svg") -t 1000 -r 2593 "Toggle Mute"
+
+## Brightness
+bindsym XF86MonBrightnessDown exec light -U 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
+bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
+
 bar {
-    position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
-    status_command while date +'%Y-%m-%d %I:%M:%S %p'; do sleep 1; done
-
-    colors {
-        statusline #ffffff
-        background #323232
-        inactive_workspace #32323200 #32323200 #5c5c5c
-    }
+    swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
