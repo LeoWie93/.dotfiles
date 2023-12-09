@@ -4,8 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-### Variables
 
+### Variables
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
@@ -16,17 +16,17 @@ set $right l
 set $term alacritty
 set $menu wofi --show drun
 
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
 
 set $laptop eDP-1
 
 output $laptop {
-    resolution 1920x1200@90Hz
+    resolution 2880x1800@90Hz
     scale 2
 }
 
-gaps inner 2
-gaps outer 2
+gaps inner 0
+gaps outer 0
 
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
@@ -47,6 +47,10 @@ input type:touchpad {
     natural_scroll enabled
 }
 
+## windows
+default_border pixel 1
+default_floating_border pixel 1
+
 
 ### Key bindings
 #
@@ -60,6 +64,11 @@ input type:touchpad {
 
     # Start your launcher
     bindsym $mod+space exec $menu
+
+    bindsym $mod+space+l exec wlogout
+
+    bindsym $mod+tab workspace next_on_output 
+    bindsym $mod+space+tab workspace prev_on_output
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -156,11 +165,11 @@ input type:touchpad {
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
+    bindsym $mod+Shift+n move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+n scratchpad show
 #
 # Resizing containers:
 #

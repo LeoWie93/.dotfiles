@@ -1,16 +1,6 @@
-# Import additional configuration files
-#
-# Imports are loaded in order, skipping all missing files, with the importing
-# file being loaded last. If a field is already present in a previous import, it
-# will be replaced.
-#
-# All imports must either be absolute paths starting with `/`, or paths relative
-# to the user's home directory starting with `~/`.
-#import:
-#  - /path/to/alacritty.yml
-
 env:
-  TERM: alacritty
+  #TERM: alacritty
+  TERM: xterm-256color
 
 window:
   dimensions:
@@ -26,9 +16,9 @@ window:
 
   decorations: none
 
-  opacity: 0.9
-    #startup_mode: Windowed
-    #title: Terminal
+  opacity: 0.98
+  #startup_mode: Windowed
+  title: Terminal
   # Allow terminal applications to change Alacritty's window title.
   dynamic_title: true
 
@@ -46,49 +36,7 @@ font:
   normal:
     family: FiraCode Nerd Font Mono
     style: Regular
-  size: 12.0
-
-colors:
-  primary:
-    background: '#1d1f21'
-    foreground: '#c5c8c6'
-    dim_foreground: '#828482'
-    bright_foreground: '#eaeaea'
-  cursor:
-    text: CellBackground
-    cursor: CellForeground
-
-  vi_mode_cursor:
-    text: CellBackground
-    cursor: CellForeground
-
-  normal:
-    black: '#1d1f21'
-    red: '#cc6666'
-    green: '#b5bd68'
-    yellow: '#f0c674'
-    blue: '#81a2be'
-    magenta: '#b294bb'
-    cyan: '#8abeb7'
-    white: '#c5c8c6'
-  bright:
-    black: '#666666'
-    red: '#d54e53'
-    green: '#b9ca4a'
-    yellow: '#e7c547'
-    blue: '#7aa6da'
-    magenta: '#c397d8'
-    cyan: '#70c0b1'
-    white: '#eaeaea'
-  dim:
-    black: '#131415'
-    red: '#864343'
-    green: '#777c44'
-    yellow: '#9e824c'
-    blue: '#556a7d'
-    magenta: '#75617b'
-    cyan: '#5b7d78'
-    white: '#828482'
+  size: 15.0
 
 cursor:
   style:
@@ -196,3 +144,10 @@ key_bindings:
   #   - gles2
   #   - gles2_pure
   #renderer: None
+
+import:
+    - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+  # - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
+  # - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
+  #  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml
+

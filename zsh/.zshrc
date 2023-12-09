@@ -38,6 +38,9 @@ export NVM_DIR="$HOME/.nvm"
 
 export PATH=/home/lwi/.scripts:$PATH
 
+### rust
+export PATH=$PATH:/home/lwi/.cargo/bin
+
 ### go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
@@ -46,9 +49,9 @@ export PATH=$PATH:$GOBIN
 ### phpstorm
 export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
 
-
 eval "$(starship init zsh)"
 
+## tmux-chooser
 if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" && $TERMINAL_EMULATOR != "JetBrains-JediTerm" ]]; then
 	tmux-chooser && exit
 fi
@@ -60,3 +63,4 @@ fi
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
