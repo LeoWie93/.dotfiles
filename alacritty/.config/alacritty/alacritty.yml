@@ -145,8 +145,8 @@ key_bindings:
   #   - gles2_pure
   #renderer: None
 
-import:
-    - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
+# import:
+    # - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
   # - ~/.config/alacritty/catppuccin/catppuccin-macchiato.yml
   # - ~/.config/alacritty/catppuccin/catppuccin-frappe.yml
   #  - ~/.config/alacritty/catppuccin/catppuccin-latte.yml

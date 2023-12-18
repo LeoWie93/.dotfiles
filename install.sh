@@ -13,6 +13,7 @@ STOW_FOLDERS=(
     "tmux"
     "themes"
     "waybar"
+    "wezterm"
     "zsh"
 )
 

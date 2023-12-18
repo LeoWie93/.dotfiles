@@ -1,7 +1,6 @@
 # Default config for sway
 #
 # Copy this to ~/.config/sway/config and edit it to your liking.
-#
 # Read `man 5 sway` for a complete reference.
 
 
@@ -13,7 +12,7 @@ set $down j
 set $up k
 set $right l
 
-set $term alacritty
+set $term wezterm
 set $menu wofi --show drun
 
 output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
@@ -64,11 +63,12 @@ default_floating_border pixel 1
 
     # Start your launcher
     bindsym $mod+space exec $menu
-
+     
     bindsym $mod+space+l exec wlogout
+    bindsym $mod+o exec /home/lwi/.dotfiles/.scripts/.scripts/sway/output_switcher.sh
 
-    bindsym $mod+tab workspace next_on_output 
-    bindsym $mod+space+tab workspace prev_on_output
+    bindsym $mod+Tab focus right
+    bindsym $mod+Shift+Tab focus left
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -151,7 +151,7 @@ default_floating_border pixel 1
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+Shift+f floating toggle
 
     # Swap focus between the tiling area and the floating area
     bindsym $mod+m focus mode_toggle
@@ -195,14 +195,22 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+## Floating windows
+for_window [app_id="org.keepassxc.KeePassXC"] floating enable
+for_window [title="Huddle"] floating enable
+for_window [title="Welcome to PhpStorm"] floating enable
+
 ## Audio
 bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && dunstify -h int:value:"$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')" -i ~/.config/dunst/assets/volume.svg -t 1000 -r 2593 "Volume: $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')%"
 bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && dunstify -h int:value:"$(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')" -i ~/.config/dunst/assets/volume.svg -t 1000 -r 2593 "Volume: $(pactl get-sink-volume @DEFAULT_SINK@ | awk '{print $5}' | sed 's/%//g')%"
-bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && dunstify -i ~/.config/dunst/assets/$(pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes" && echo "volume-mute.svg" || echo "volume.svg") -t 1000 -r 2593 "Toggle Mute"
+bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && dunstify -i ~/.config/dunst/assets/$(pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes" && echo "volume.svg" || echo "volume-mute.svg") -t 1000 -r 2593 "Toggle Mute"
 
 ## Brightness
 bindsym XF86MonBrightnessDown exec light -U 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
 bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
+
+exec solaar -w
+exec xremap ~/.config/xremap/config.yml
 
 bar {
     swaybar_command waybar
