@@ -72,7 +72,7 @@ cmp.setup {
         end,
     },
     preselect = 'item',
-    --     completeopt = 'menu,menuone,noinsert'
+    completeopt = 'menu,menuone,noinsert',
     -- completion = {
     -- },
     mapping = cmp.mapping.preset.insert({
