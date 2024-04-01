@@ -36,6 +36,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion 
 
+### ma scripts
 export PATH=/home/lwi/.scripts:$PATH
 
 ### rust
@@ -57,10 +58,5 @@ if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" && $TERMINAL_EMULATOR != "JetBrains
 fi
 
 
-# bun completions
-[ -s "/home/lwi/.bun/_bun" ] && source "/home/lwi/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
+# Turso
+export PATH="/home/lwi/.turso:$PATH"

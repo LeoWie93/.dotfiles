@@ -1,8 +1,13 @@
 local dap_ui_ok, ui = pcall(require, "dapui")
 local dap_ok, dap = pcall(require, "dap")
 
-if not (dap_ok and dap_ui_ok) then
-    require("notify")("dap-ui not installed!", "warning")
+if not (dap_ok) then
+    require("notify")("nvim-dap is not installed!", "warning")
+    return
+end
+
+if not (dap_ui_ok) then
+    require("notify")("nvim-dap-ui is not installed!", "warning")
     return
 end
 
@@ -47,26 +52,35 @@ ui.setup({
     },
 })
 
-
-
-if not (dap_ok and dap_ui_ok) then
-    require("notify")("nvim-dap or dap-ui not installed!", "warning") -- nvim-notify is a separate plugin, I recommend it too!
-    return
-end
-
 vim.fn.sign_define('DapBreakpoint', { text = 'BR' })
 
--- Start debugging session
-vim.keymap.set("n", "<leader>ds", function()
-    dap.continue()
-    ui.toggle({})
+-- Open debugger
+dap.listeners.after.event_initialized["dapui_config"] = function()
+    ui.open()
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false) -- Spaces buffers evenly
-end)
+end
+
+-- Close debugger and clear breakpoints
+dap.listeners.before.event_terminated["dapui_config"] = function()
+    dap.clear_breakpoints()
+    ui.close()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+    require("notify")("Debugger session ended", "warn")
+end
+
+dap.listeners.before.event_exited["dapui_config"] = function()
+    dap.clear_breakpoints()
+    ui.close()
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
+    require("notify")("Debugger session ended", "warn")
+end
 
 -- Set breakpoints, get variable values, step into/out of functions, etc.
 vim.keymap.set("n", "<leader>dl", require("dap.ui.widgets").hover)
 vim.keymap.set("n", "<leader>dc", dap.continue)
 vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+vim.keymap.set("n", "<leader>dB", function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
+
 vim.keymap.set("n", "<leader>dn", dap.step_over)
 vim.keymap.set("n", "<leader>di", dap.step_into)
 vim.keymap.set("n", "<leader>do", dap.step_out)
@@ -75,11 +89,4 @@ vim.keymap.set("n", "<leader>dC", function()
     require("notify")("Breakpoints cleared", "warn")
 end)
 
--- Close debugger and clear breakpoints
-vim.keymap.set("n", "<leader>de", function()
-    dap.clear_breakpoints()
-    ui.toggle({})
-    dap.terminate()
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>=", false, true, true), "n", false)
-    require("notify")("Debugger session ended", "warn")
-end)
+require("nvim-dap-virtual-text").setup()

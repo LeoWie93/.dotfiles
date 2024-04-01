@@ -7,9 +7,9 @@
 ### Variables
 set $mod Mod4
 # Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
+set $left h 
+set $down j 
+set $up k 
 set $right l
 
 set $term wezterm
@@ -18,7 +18,6 @@ set $menu wofi --show drun
 output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
 
 set $laptop eDP-1
-
 output $laptop {
     resolution 2880x1800@90Hz
     scale 2
@@ -37,8 +36,16 @@ exec swayidle -w \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
-input type:keyboard {
+input * {
     xkb_layout "ch"
+}
+
+input 13364:640:Keychron_Keychron_K8_Pro {
+    xkb_layout "us"
+}
+
+input 12951:6505:ZSA_Technology_Labs_Moonlander_Mark_I {
+    xkb_layout "us"
 }   
 
 input type:touchpad {
@@ -60,12 +67,14 @@ default_floating_border pixel 1
 
     # Kill focused window
     bindsym $mod+Shift+q kill
-
+    
     # Start your launcher
     bindsym $mod+space exec $menu
      
-    bindsym $mod+space+l exec wlogout
-    bindsym $mod+o exec /home/lwi/.dotfiles/.scripts/.scripts/sway/output_switcher.sh
+    bindsym $mod+Alt+l exec wlogout
+
+    # display options
+    bindsym $mod+Alt+p exec /home/lwi/.dotfiles/.scripts/.scripts/sway/output_switcher.sh
 
     bindsym $mod+Tab focus right
     bindsym $mod+Shift+Tab focus left
@@ -209,8 +218,14 @@ bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle &&
 bindsym XF86MonBrightnessDown exec light -U 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
 bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
 
-exec solaar -w
+## General
+bindsym $mod+Alt+period exec grim -g "$(slurp)" - | swappy -f -
+bindsym $mod+Alt+minus exec grim -g "$(slurp)" - | tesseract stdin stdout | wl-copy -p
+
+## Autostart
+exec nm-applet &
 exec xremap ~/.config/xremap/config.yml
+exec solaar -w hide
 
 bar {
     swaybar_command waybar
