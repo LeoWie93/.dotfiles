@@ -6,7 +6,8 @@ if wezterm.config_builder then
 end
 
 -- custom
-config.color_scheme = 'Catppuccin Mocha'
+config.color_scheme = 'Tokyo Night'
+-- config.color_scheme = 'Catppuccin Mocha'
 -- config.color_scheme = 'rose-pine'
 -- config.font = wezterm.font 'FiraCode Nerd Font Mono'
 config.font = wezterm.font 'JetBrainsMono Nerd Font'

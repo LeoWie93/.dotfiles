@@ -4,6 +4,7 @@ require("neodev").setup()
 -- lspconfig
 local lspconfig = require('lspconfig')
 
+-- install with mason
 require('mason').setup({})
 require('mason-lspconfig').setup({
     ensure_installed = {
@@ -25,12 +26,14 @@ require('mason-lspconfig').setup({
     }
 })
 
+-- setup each language server with keybindings and capabilities
+
 local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gd", '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = bufnr })
-    vim.keymap.set("n", "gt", '<cmd>lua vim.lsp.buf.type_definition()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "gi", '<cmd>lua vim.lsp.buf.implementation()<cr>', { buffer = bufnr })
+    vim.keymap.set("n", "gt", '<cmd>lua vim.lsp.buf.type_definition()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "K", '<cmd>lua vim.lsp.buf.hover()<cr>', { buffer = bufnr })
-    vim.keymap.set("n", "<leader>r", '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = bufnr })
+    vim.keymap.set("n", "<leader>rn", '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "<leader>dk", '<cmd>lua vim.diagnostic.goto_prev()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "<leader>dj", '<cmd>lua vim.diagnostic.goto_next()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "<leader>dt", '<cmd>Telescope diagnostics<cr>', { buffer = bufnr })
@@ -42,7 +45,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 require("mason-lspconfig").setup_handlers {
     function(server_name)
-        require("lspconfig")[server_name].setup {
+        lspconfig[server_name].setup {
             on_attach = on_attach,
             capabilities = capabilities
         }
@@ -61,20 +64,28 @@ require("mason-lspconfig").setup_handlers {
     end
 }
 
+-- cmp setup
+
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" } -- setting vim values
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
-cmp.setup {
+cmp.setup({
+    preselect = 'item',
+    completion = {
+        completeopt = 'menu,menuone,noinsert',
+    },
     snippet = {
         expand = function(args)
             require('luasnip').lsp_expand(args.body)
         end,
     },
-    preselect = 'item',
-    completeopt = 'menu,menuone,noinsert',
-    -- completion = {
-    -- },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'luasnip' },
+        { name = 'buffer' },
+        { name = 'path' },
+    }),
     mapping = cmp.mapping.preset.insert({
         ['<C-y>'] = cmp.mapping.confirm({ select = false }),
         ['<C-Space>'] = cmp.mapping.complete(),
@@ -84,16 +95,12 @@ cmp.setup {
 
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    }),
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-    }, {
-        { name = 'luasnip' },
-    }, {
-        { name = 'buffer' }
-    })
-}
 
+        ['<C-e>'] = cmp.mapping.abort(),
+    }),
+})
+
+-- diagnostic fine tuning
 vim.diagnostic.config({
     virtual_text = true,
     signs = true,
