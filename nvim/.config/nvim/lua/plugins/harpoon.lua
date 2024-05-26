@@ -1,5 +1,7 @@
 return {
-    'theprimeagen/harpoon',
+    "theprimeagen/harpoon",
+    -- branch = "harpoon2",
+    dependencies = { "nvim-lua/plenary.nvim" },
     init = function()
         local mark = require("harpoon.mark")
         local ui = require("harpoon.ui")

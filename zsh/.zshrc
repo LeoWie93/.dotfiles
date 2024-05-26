@@ -32,6 +32,9 @@ bindkey -s ^n "tmux-session\n"
 source $HOME/.aliases
 
 ## exports / tools
+
+export EDITOR=nvim
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion 
@@ -50,6 +53,9 @@ export PATH=$PATH:$GOBIN
 ### phpstorm
 export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
 
+### Turso
+export PATH="/home/lwi/.turso:$PATH"
+
 eval "$(starship init zsh)"
 
 ## tmux-chooser
@@ -57,6 +63,3 @@ if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" && $TERMINAL_EMULATOR != "JetBrains
 	tmux-chooser && exit
 fi
 
-
-# Turso
-export PATH="/home/lwi/.turso:$PATH"
