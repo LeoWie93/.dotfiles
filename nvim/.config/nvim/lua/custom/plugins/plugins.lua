@@ -7,11 +7,13 @@ return {
         dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" }
     },
     'theHamsta/nvim-dap-virtual-text',
+
     {
         'numToStr/Comment.nvim',
         opts = {},
         lazy = false,
     },
+
     -- setup copilot by recommended projet from lsp zero
 
     -- LSP Support
