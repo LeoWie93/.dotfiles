@@ -4,12 +4,13 @@ return {
         name = "tokyonight",
         lazy = false,
         priority = 1000,
-        init = function(plugin, opts)
+        config = function(plugin, opts)
             vim.cmd.colorscheme("tokyonight-night")
         end,
         opts = {
             on_highlights = function(hl, c)
                 local prompt = "#2d3149"
+                -- TODO maybe ge telescope colorscheme workin?
                 -- hl.TelescopeNormal = {
                 --     bg = c.bg_dark,
                 --     fg = c.fg_dark,

@@ -64,42 +64,6 @@ require("mason-lspconfig").setup_handlers {
     end
 }
 
--- cmp setup
-
-vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" } -- setting vim values
-
-local cmp = require('cmp')
-local cmp_select = { behavior = cmp.SelectBehavior.Select }
-cmp.setup({
-    preselect = 'item',
-    completion = {
-        completeopt = 'menu,menuone,noinsert',
-    },
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end,
-    },
-    sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'buffer' },
-        { name = 'path' },
-    }),
-    mapping = cmp.mapping.preset.insert({
-        ['<C-y>'] = cmp.mapping.confirm({ select = false }),
-        ['<C-Space>'] = cmp.mapping.complete(),
-
-        ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-        ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-
-        ['<C-e>'] = cmp.mapping.abort(),
-    }),
-})
-
 -- diagnostic fine tuning
 vim.diagnostic.config({
     virtual_text = true,
