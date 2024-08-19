@@ -11,6 +11,7 @@ config.color_scheme = 'Tokyo Night'
 -- config.color_scheme = 'rose-pine'
 -- config.font = wezterm.font 'FiraCode Nerd Font Mono'
 config.font = wezterm.font 'JetBrainsMono Nerd Font'
+config.font_size = 17
 config.window_background_opacity = 1
 config.scrollback_lines = 5000
 

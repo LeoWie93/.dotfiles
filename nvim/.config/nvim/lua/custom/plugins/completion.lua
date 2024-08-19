@@ -39,6 +39,7 @@ return {
                 { name = 'path' },
                 { name = 'buffer' },
                 { name = 'luasnip' },
+                { name = 'lazydev' },
             }),
             mapping = cmp.mapping.preset.insert({
                 ['<C-y>'] = cmp.mapping(

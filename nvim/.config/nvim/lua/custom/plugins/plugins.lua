@@ -26,4 +26,8 @@ return {
 
     -- Lua
     'folke/neodev.nvim', -- Required
+    -- {
+    --     'folke/lazydev.nvim', -- Required
+    --     ft = "lua",
+    -- },
 }

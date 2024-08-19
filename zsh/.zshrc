@@ -15,6 +15,7 @@ source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 #### bindings
+bindkey "^R" history-incremental-pattern-search-backward # ctrl+R | bash like incremental search
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 bindkey "^[[1;5C" forward-word
@@ -39,7 +40,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion 
 
-### ma scripts
+### my scripts
 export PATH=/home/lwi/.scripts:$PATH
 
 ### rust
@@ -56,10 +57,19 @@ export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
 ### Turso
 export PATH="/home/lwi/.turso:$PATH"
 
-eval "$(starship init zsh)"
 
-## tmux-chooser
+### bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# bun completions
+[ -s "/home/lwi/.bun/_bun" ] && source "/home/lwi/.bun/_bun"
+
+# tmux-chooser
 if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" && $TERMINAL_EMULATOR != "JetBrains-JediTerm" ]]; then
 	tmux-chooser && exit
 fi
+
+# Starship
+eval "$(starship init zsh)"
 

@@ -20,7 +20,12 @@ output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
 set $laptop eDP-1
 output $laptop {
     resolution 2880x1800@90Hz
-    scale 2
+    scale 1
+}
+
+output DP-1 {
+    resolution 3840x2160@60Hz
+    scale 1
 }
 
 gaps inner 0
@@ -220,7 +225,7 @@ bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat
 
 ## General
 bindsym $mod+Alt+period exec grim -g "$(slurp)" - | swappy -f -
-bindsym $mod+Alt+minus exec grim -g "$(slurp)" - | tesseract stdin stdout | wl-copy -p
+bindsym $mod+Alt+minus exec grim -g "$(slurp)" - | tesseract stdin stdout | wl-copy
 
 ## Autostart
 exec nm-applet &
