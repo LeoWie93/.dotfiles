@@ -8,6 +8,7 @@ STOW_FOLDERS=(
     "rofi"
     "starship"
     ".scripts"
+    "swappy"
     "sway"
     "swaylock"
     "tmux"

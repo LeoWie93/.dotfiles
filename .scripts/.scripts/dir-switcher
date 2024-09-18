@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-dir=$(fd -H --type d --type l --max-depth=1 -u --search-path ~ --search-path ~/personal --search-path ~/work --search-path ~/.config | fzf-tmux -p)
+dir=$(fd -H --type d --type l --max-depth=1 -u --search-path ~ --search-path ~/personal --search-path ~/work --search-path ~/fhnw --search-path ~/.config | fzf-tmux -p)
 
 cd $dir

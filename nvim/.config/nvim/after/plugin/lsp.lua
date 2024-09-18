@@ -20,17 +20,17 @@ require('mason-lspconfig').setup({
         'lua_ls',
         'lemminx',
         'rust_analyzer',
-        'tsserver',
+        'ts_ls',
         'yamlls',
     }
 })
 
 -- setup each language server with keybindings and capabilities
-
 local on_attach = function(client, bufnr)
     vim.keymap.set("n", "gd", '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "gi", '<cmd>lua vim.lsp.buf.implementation()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "gt", '<cmd>lua vim.lsp.buf.type_definition()<cr>', { buffer = bufnr })
+    vim.keymap.set("n", "gr", '<cmd>lua vim.lsp.buf.references()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "<leader>rn", '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "<leader>dk", '<cmd>lua vim.diagnostic.goto_prev()<cr>', { buffer = bufnr })
     vim.keymap.set("n", "<leader>dj", '<cmd>lua vim.diagnostic.goto_next()<cr>', { buffer = bufnr })

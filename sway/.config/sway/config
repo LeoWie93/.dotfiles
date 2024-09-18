@@ -37,8 +37,8 @@ bindswitch --reload --locked lid:off output $laptop enable
 exec_always /home/lwi/.scripts/sway/lid.sh
 
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+         timeout 1000 'swaylock -f -c 000000' \
+         timeout 1600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
          before-sleep 'swaylock -f -c 000000'
 
 input * {
