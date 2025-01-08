@@ -20,3 +20,6 @@ alias ds='fd --type d --max-depth=1 | fzf-tmux -p | xargs nvim'
 
 alias vim='nvim'
 
+
+alias fhnw-vpn='gtk-launch com.cisco.secureclient.gui &'
+

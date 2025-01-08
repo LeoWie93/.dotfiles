@@ -1,11 +1,9 @@
 #!/bin/env bash
 
 STOW_FOLDERS=(
-    "alacritty"
     "aliases"
     "dunst"
     "nvim"
-    "rofi"
     "starship"
     ".scripts"
     "swappy"

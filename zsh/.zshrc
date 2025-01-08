@@ -51,6 +51,13 @@ export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
+### odin
+export PATH="/home/lwi/sourcecode/Odin:$PATH"
+
+### java
+#### java sway gui not rendering. Just getting a white window
+export _JAVA_AWT_WM_NONREPARENTING=1
+
 ### phpstorm
 export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
 

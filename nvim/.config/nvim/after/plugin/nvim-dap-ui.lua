@@ -89,4 +89,4 @@ vim.keymap.set("n", "<leader>dC", function()
     require("notify")("Breakpoints cleared", "warn")
 end)
 
-require("nvim-dap-virtual-text").setup()
+require("nvim-dap-virtual-text").setup({})

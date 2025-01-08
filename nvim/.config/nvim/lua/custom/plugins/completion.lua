@@ -37,6 +37,7 @@ return {
             sources = cmp.config.sources({
                 { name = 'nvim_lsp' },
                 { name = 'path' },
+                { name = 'gopls' },
                 { name = 'buffer' },
                 { name = 'luasnip' },
                 { name = 'lazydev' },

@@ -3,19 +3,23 @@ local set = vim.keymap.set
 -- is handled by oil
 -- vim.keymap.set("n", "<leader>ee", vim.cmd.Ex)
 
--- splits
---- nav
-set("n", "<c-h>", "<c-w><c-h>")
-set("n", "<c-j>", "<c-w><c-j>")
-set("n", "<c-k>", "<c-w><c-k>")
-set("n", "<c-l>", "<c-w><c-l>")
+-- nav
+--- splits
+set("n", "<C-H>", "<C-W><C-h>")
+set("n", "<C-j>", "<c-W><c-j>")
+set("n", "<C-k>", "<c-w><c-k>")
+set("n", "<C-l>", "<c-w><c-l>")
 
---- split
-set("n", "<M-,>", "<c-w>5<")
-set("n", "<M-.>", "<c-w>5>")
-set("n", "<M-t>", "<c-w>+")
-set("n", "<M-s>", "<c-w>-")
+--- quickfix
+set("n", "<M-j>", "<cmd>cnext<CR>")
+set("n", "<M-k>", "<cmd>cprev<CR>")
 
+-- split
+set("n", "<M-s>.", "<C-W>v")
+set("n", "<M-s>,", "<C-W>s>")
+
+-- tabs
+set("n", "<C-t>.", "<C-W>gf")
 -- tab nav
 set("n", "<M-left>", "gT")
 set("n", "<M-right>", "gt")
