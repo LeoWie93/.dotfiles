@@ -12,7 +12,8 @@ set $down j
 set $up k 
 set $right l
 
-set $term wezterm
+#set $term wezterm
+set $term ghostty
 set $menu wofi -i --show drun
 
 output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
@@ -59,7 +60,7 @@ input type:touchpad {
 }
 
 ## windows
-default_border pixel 1
+default_border pixel 0
 default_floating_border pixel 1
 
 

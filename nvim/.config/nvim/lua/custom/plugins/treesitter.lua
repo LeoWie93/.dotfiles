@@ -50,6 +50,7 @@ return {
                     end
                 end,
             },
+            indent = { enabled = true },
         },
         config = function(_, opts)
             if type(opts.ensure_installed) == "table" then

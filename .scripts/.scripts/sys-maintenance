@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+echo "Pacman remove orphaned packages"
+sudo pacman -Qdtq | sudo pacman -Rns -
+
+echo "journalctl"
+sudo journalctl --vacuum-time=14d
+
+echo "systemctl"
+systemctl --failed
+
+echo ".pacnew files"
+sudo find /etc -name "*.pacnew"
+
+echo ".pacsave files"
+sudo find /etc -name "*.pacsave"
+
+echo ".cache size"
+du -sh ~/.cache
+

@@ -9,17 +9,16 @@ alias cdp='cd ~/personal'
 alias cdnc='cd ~/.config/nvim'
 
 # GIT
-alias gba='git branch -a'
-alias gc='git commit'
 alias ngc='npm run commit'
-alias git-fu='git add . && git commit --amend --no-edit && git push origin $(git rev-parse --abbrev-ref HEAD) -f'
-alias git-fp='git fetch origin --prune --prune-tags && git remote prune origin'
 
 alias fs='fd --type f --type l --max-depth=1 --hidden --exclude .git | fzf-tmux -p | xargs nvim'
 alias ds='fd --type d --max-depth=1 | fzf-tmux -p | xargs nvim'
 
+# Re maps
 alias vim='nvim'
-
+alias nvm='fnm'
 
 alias fhnw-vpn='gtk-launch com.cisco.secureclient.gui &'
+alias pdfconvert='soffice --headless --convert-to pdf'
 
+alias tn='tmux new -s'

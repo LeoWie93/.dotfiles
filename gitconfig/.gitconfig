@@ -1,0 +1,32 @@
+[alias]
+    ba = branch -a
+    st = status -sb
+    co = checkout
+    l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --date=short --color --decorate
+    fp = !git fetch origin --prune --prune-tags && git remote prune origin
+[user]
+	email = leonardo.wiedemeier@gmail.com
+	name = Leonardo Wiedemeier
+[init]
+	defaultBranch = main
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[help]
+[commit]
+    verbose = true
+[merge]
+	conflictStyle = zdiff3
+[pull]
+	rebase = true

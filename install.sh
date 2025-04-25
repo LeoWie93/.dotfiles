@@ -3,6 +3,9 @@
 STOW_FOLDERS=(
     "aliases"
     "dunst"
+    "fastfetch"
+    "ghostty"
+    "gitconfig"
     "nvim"
     "starship"
     ".scripts"
@@ -12,7 +15,7 @@ STOW_FOLDERS=(
     "tmux"
     "themes"
     "waybar"
-    "wezterm"
+    "wofi"
     "zsh"
 )
 

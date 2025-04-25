@@ -4,38 +4,22 @@
 format = """
 $username\
 $hostname\
-$localip\
 $directory\
-$fossil_branch\
 $git_branch\
 $git_commit\
 $git_state\
-$git_metrics\
 $git_status\
-$hg_branch\
-$package\
 $custom\
-$sudo\
 $cmd_duration\
 $line_break\
 $jobs\
-$battery\
-$time\
 $status\
-$os\
-$container\
-$shell\
 $character"""
 
 # Inserts a blank line between shell prompts
 add_newline = true
 
-[golang]
-format = '[$version](bold cyan)'
-
 [character]
 success_symbol = '[>](bold green) '
 error_symbol = '[>](bold red) '
 
-[package]
-disabled = true

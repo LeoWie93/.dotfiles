@@ -1,0 +1,2 @@
+# TODO
+- [ ] ghostty config
