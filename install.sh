@@ -2,6 +2,7 @@
 
 STOW_FOLDERS=(
     "aliases"
+    "bat"
     "dunst"
     "fastfetch"
     "ghostty"
