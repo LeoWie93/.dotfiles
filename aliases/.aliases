@@ -22,3 +22,5 @@ alias fhnw-vpn='gtk-launch com.cisco.secureclient.gui &'
 alias pdfconvert='soffice --headless --convert-to pdf'
 
 alias tn='tmux new -s'
+alias ip='ip -c=always'
+
