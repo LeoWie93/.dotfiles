@@ -19,7 +19,6 @@ return {
                     ["@markup.list.checked.markdown"] = { link = "WarningMsg" }
                 }
             end,
-            theme = "wave",
         },
         build = function()
             vim.cmd [[KanagawaCompile]]

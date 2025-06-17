@@ -30,6 +30,7 @@ source $HOME/.aliases
 
 # exports / tools
 export EDITOR=nvim
+export MANPAGER='nvim +Man!'
 
 # my scripts
 export PATH=/home/lwi/.scripts:$PATH
@@ -41,9 +42,6 @@ export PATH=$PATH:/home/lwi/.cargo/bin
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-
-# odin
-export PATH="/home/lwi/sourcecode/Odin:$PATH"
 
 # java
 ## java sway gui not rendering. Just getting a white window
@@ -64,5 +62,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Evals
 eval "$(fnm env --use-on-cd --shell zsh)"
 eval "$(starship init zsh)"
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
 

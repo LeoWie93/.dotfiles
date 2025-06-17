@@ -45,8 +45,11 @@
 font-size=20
 font-family="FiraCode Nerd Font Mono"
 font-feature=-liga, -calt, -dlig
-theme=tokyonight
+
+# Theme
 theme="Kanagawa Wave"
+background-opacity=0.95
+background-blur=true
 
 # Mouse
 mouse-hide-while-typing=true

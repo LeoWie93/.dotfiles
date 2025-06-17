@@ -35,13 +35,16 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
+        version = "^1",
         dependencies = {
-            'williamboman/mason.nvim',
+            {
+                'williamboman/mason.nvim',
+                version = "^1",
+            }
         },
         opts = {
-            automatic_installation = false,
+            automatic_enabled = false,
             ensure_installed = {
-                'ansiblels',
                 'bashls',
                 'dockerls',
                 'docker_compose_language_service',
@@ -62,7 +65,7 @@ return {
             -- lspconfig
             local lspconfig = require('lspconfig')
 
-            -- TODO is this really needed here?
+            -- TODO is this really needed here? I do not think so
             require('mason').setup()
 
             -- setup each language server with keybindings and capabilities
