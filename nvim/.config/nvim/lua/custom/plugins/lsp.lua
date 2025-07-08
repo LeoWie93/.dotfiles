@@ -65,7 +65,7 @@ return {
             -- lspconfig
             local lspconfig = require('lspconfig')
 
-            -- TODO is this really needed here? I do not think so
+            -- This is required!
             require('mason').setup()
 
             -- setup each language server with keybindings and capabilities
@@ -84,15 +84,10 @@ return {
             end
 
             local capabilities = require('cmp_nvim_lsp').default_capabilities()
+            local servers = require("mason-lspconfig").get_installed_servers()
 
-            require("mason-lspconfig").setup_handlers {
-                function(server_name)
-                    lspconfig[server_name].setup {
-                        on_attach = on_attach,
-                        capabilities = capabilities
-                    }
-                end,
-                ["gopls"] = function()
+            for _, server_name in pairs(servers) do
+                if server_name == "gopls" then
                     lspconfig.gopls.setup {
                         on_attach = on_attach,
                         capabilities = capabilities,
@@ -103,8 +98,24 @@ return {
                             }
                         }
                     }
-                end,
-            }
+                else
+                    lspconfig[server_name].setup {
+                        on_attach = on_attach,
+                        capabilities = capabilities
+                    }
+                end
+            end
+
+            -- require("mason-lspconfig").setup_handlers {
+            --     function(server_name)
+            --         lspconfig[server_name].setup {
+            --             on_attach = on_attach,
+            --             capabilities = capabilities
+            --         }
+            --     end,
+            --     ["gopls"] = function()
+            --     end,
+            -- }
         end
     }
 }
