@@ -25,24 +25,24 @@ choosen=$(echo -e $menuOptions | wofi -i --dmenu)
 if test $choosen = "resolutions"
 then
 
-resOptions=""
-resolutions=$(swaymsg -t get_outputs | jq -r --arg option "$selected_name" '.[] | select(.name == $option)' | jq -r '.modes')
+    resOptions=""
+    resolutions=$(swaymsg -t get_outputs | jq -r --arg option "$selected_name" '.[] | select(.name == $option)' | jq -r '.modes')
 
-items=$(echo $resolutions | jq -c -r '.[]')
-for option in ${items[@]}; do
-    height=$(echo "$option" | jq -r '.height')
-    width=$(echo "$option" | jq -r '.width')
+    items=$(echo $resolutions | jq -c -r '.[]')
+    for option in ${items[@]}; do
+        height=$(echo "$option" | jq -r '.height')
+        width=$(echo "$option" | jq -r '.width')
 
-    refresh=$(echo "$option" | jq -r '.refresh')
-    refresh=$(jq -n "$refresh/1000")
+        refresh=$(echo "$option" | jq -r '.refresh')
+        refresh=$(jq -n "$refresh/1000")
 
-    resOptions+="${width}x${height}@${refresh}Hz${NEWLINE}"
-done
+        resOptions+="${width}x${height}@${refresh}Hz${NEWLINE}"
+    done
 
-selected_resolution=$(echo -e $resOptions | wofi -i --dmenu)
-sway output "${selected_name} mode ${selected_resolution}"
+    selected_resolution=$(echo -e $resOptions | wofi -i --dmenu)
+    sway output "${selected_name} mode ${selected_resolution}"
 
-exit 0
+    exit 0
 
 fi
 
