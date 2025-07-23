@@ -35,11 +35,11 @@ return {
     },
     {
         'williamboman/mason-lspconfig.nvim',
-        version = "^1",
+        version = "^2",
         dependencies = {
             {
                 'williamboman/mason.nvim',
-                version = "^1",
+                version = "^2",
             }
         },
         opts = {
