@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+echo "Update packages"
+sudo paru -Syu
+
+echo "Update flatpak"
+flatpak update
+
+echo "Flatpack cleanup"
+flatpak remove --unused
+
+echo "hyprpm update"
+hyprpm update
