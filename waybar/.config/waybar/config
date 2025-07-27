@@ -9,7 +9,7 @@
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
-        "format": "{name}: {icon}",
+        "format": "{name}",
 		"show-special": true,
         "format-icons": {
             "active": "",
@@ -29,11 +29,20 @@
     },
     "clock": {
         "interval": 60,
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "format": "{:%d - %H:%M}",
         "calendar": {
-            "weeks-pos": "left"
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+          }
         },
     },
     "cpu": {
@@ -64,29 +73,19 @@
         "format-charging": "{capacity}% 󰂄",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "network": {
-        "format-wifi": "{essid} {ipaddr} ({signalStrength}%)",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr}",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
-    },
     "pulseaudio": {
-        "format": "{icon}",
-        "format-bluetooth": "{icon}",
-        "format-bluetooth-muted": " {icon}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format": "{icon} {volume}% {format_source}",
+        "format-bluetooth": " {icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "hands-free": "hands-free",
+            "headset": "",
             "phone": "",
             "portable": "",
             "default": ["", "", ""]
