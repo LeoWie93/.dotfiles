@@ -1,40 +1,44 @@
 * {
-    font-size:15px;
+    font-size: 28px;
     font-family: "CodeNewRoman Nerd Font Propo", "Font Awesome 6 Free Solid", "Font Awesome 6 Free Regular", "Font Awesome 6 Brands Regular", "Symbols Nerd Font Mono", "Symbols Nerd Font";
 }
 
-window#waybar{
+window#waybar {
     all: unset;
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modules-left {
+    padding: 0;
+    margin: 0px 0px 0px 5px;
+}
+
+.modules-center {
     padding: 0;
     margin: 0;
 }
 
-.modules-left {
-    margin: 2px 0px 2px 5px;
-}
-.modules-center {
-    margin: 2px 0px 2px 0px;
-}
 .modules-right {
-    margin: 2px 5px 2px 0px;
+    padding: 0;
+    margin: 0px 5px 0px 0px;
 }
 
 tooltip {
-  background: rgba(0,0,0, 0.9);
-  border: 1px solid rgba(100, 114, 125, 0.9);
-}
-tooltip label {
-  color: white;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(100, 114, 125, 0.9);
 }
 
-.modules-right .module, .modules-left .module, .modules-center .module {
-    padding: 0px 5px;
+tooltip label {
     color: white;
 }
 
-#workspaces, #idle_inhibitor, #clock, #tray, #pulseaudio, #memory, #cpu, #temperature, #network, #battery {
-    background: black;
-    border-radius: 5px;
+.modules-right .module,
+.modules-left .module,
+.modules-center .module {
+    padding: 0px 5px;
+    color: white;
 }
 
 /* WORKSPACES */
@@ -49,7 +53,7 @@ tooltip label {
 #workspaces button label {
     padding: 5px 5px;
     color: white;
-	font-weight: 400;
+    font-weight: 400;
 }
 
 #workspaces button:last-child label {
@@ -57,36 +61,27 @@ tooltip label {
 }
 
 #workspaces button.active label {
-	font-weight: 600;
+    font-weight: 600;
     text-decoration: underline;
 }
 
-#tray, #pulseaudio, #memory, #cpu, #temperature, #network, #battery{
-    margin: 0;
-    padding: 3px 5px;
-}
-
-#tray {
-    border-radius: 5px 0 0 5px;
-}
-
+#tray,
+#pulseaudio,
+#memory,
+#cpu,
+#temperature,
+#network,
 #battery {
-    border-radius: 0 5px 5px 0;
+    margin: 0;
+    padding: 0px 5px;
 }
 
-/* #mode { */
-/* 	margin-left: 10px; */
-/* 	background-color: rgb(248, 189, 150); */
-/*     color: rgb(26, 24, 38); */
-/* } */
 #memory {
     color: rgb(181, 232, 224);
-    border-radius: 0;
 }
 
 #cpu {
     color: rgb(245, 194, 231);
-    border-radius: 0;
 }
 
 #clock {
@@ -100,17 +95,14 @@ tooltip label {
 
 #temperature {
     color: rgb(150, 205, 251);
-    border-radius: 0;
 }
 
 #backlight {
     color: rgb(248, 189, 150);
-    border-radius: 0;
 }
 
 #pulseaudio {
     color: rgb(245, 224, 220);
-    border-radius: 0;
 }
 
 #battery.charging,
@@ -126,4 +118,3 @@ tooltip label {
 #custom-cava-internal {
     font-family: "Hack Nerd Font";
 }
-

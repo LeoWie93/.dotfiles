@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Obsidian
 #Exec=/usr/bin/obsidian %U
+#Exec=env QT_SCALE_FACTOR=2 wireshark %f
 Exec=env ELECTRON_OZONE_PLATFORM_HINT=auto /usr/bin/obsidian %U
 Terminal=false
 Type=Application
@@ -9,3 +10,4 @@ StartupWMClass=obsidian
 Comment=Obsidian
 MimeType=x-scheme-handler/obsidian;
 Categories=Office;
+

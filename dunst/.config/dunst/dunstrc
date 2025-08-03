@@ -1,14 +1,15 @@
 [global]
     monitor = 0
-    font = Atkinson Hyperlegible 10
+    font = Atkinson Hyperlegible 18
+    width = 400
     frame_width = 1
     frame_color = "#b4befe"
     separator_color= frame
     highlight = "#74c7ec"
     background = "#000000dd"
     foreground = "#cdd6f4dd"
-    min_icon_size = 32
-    max_icon_size = 32
+    min_icon_size = 48
+    max_icon_size = 48
 
     corner_radius = 5
     progress_bar_corner_radius = 5
@@ -23,13 +24,13 @@
     foreground = "#a6e3a1dd"
     frame_color = "#a6e3a1dd"
     #default_icon = "~/.config/dunst/icons/bell-badge-low.svg"
-    timeout = 10
+    timeout = 5
 
 [urgency_normal]
     foreground = "#74c7ecdd"
     frame_color = "#74c7ecdd"
     #default_icon = "~/.config/dunst/icons/bell-badge.svg"
-    timeout = 10
+    timeout = 15
 
 [urgency_critical]
     foreground = "#f38ba8dd"

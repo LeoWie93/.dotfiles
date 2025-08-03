@@ -25,7 +25,3 @@ alias pdfconvert='soffice --headless --convert-to pdf'
 alias tn='tmux new -s'
 alias ip='ip -c=always'
 
-
-
-alias wireshark='QT_SCALE_FACTOR=2 sudo -E wireshark'
-

@@ -225,7 +225,7 @@ bindsym XF86MonBrightnessDown exec light -U 5 && dunstify -h int:value:"$(( ($(c
 bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
 ##TODO replace light with brightnessctl
 #bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-#bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+#bindsym --locked XF87MonBrightnessUp exec brightnessctl set 5%+
 
 ## General
 bindsym $mod+Alt+period exec grim -g "$(slurp)" - | swappy -f -
