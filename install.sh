@@ -16,7 +16,6 @@ STOW_FOLDERS=(
     "swappy"
     "sway"
     "swaylock"
-    "ssh"
     "tmux"
     "themes"
     "waybar"

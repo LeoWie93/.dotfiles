@@ -1,9 +1,11 @@
 #!/usr/bin/env sh
+
+# do we still need this file for hyperland?
 if grep -q open /proc/acpi/button/lid/LID0/state; then
-    if [ "$(acpi -a)" == "Adapter 0: on-line" ]; then
-        hyprctl keyword monitor eDP-1,enable
-    fi
+    hyprctl keyword monitor eDP-1,enable
 else
-    hyprctl keyword monitor eDP-1,disable
+    if [ "$(acpi -a)" == "Adapter 0: on-line" ]; then
+        hyprctl keyword monitor eDP-1,disable
+    fi
 fi
 

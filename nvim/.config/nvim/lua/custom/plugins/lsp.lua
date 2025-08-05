@@ -45,7 +45,7 @@ return {
         opts = {
             automatic_enabled = false,
             ensure_installed = {
-                'bashls',
+                'bash-language-server',
                 'dockerls',
                 'docker_compose_language_service',
                 'eslint',
@@ -57,7 +57,7 @@ return {
                 'lua_ls',
                 'lemminx',
                 'rust_analyzer',
-                'ts_ls',
+                'typescript-language-server',
                 'yamlls',
             }
         },

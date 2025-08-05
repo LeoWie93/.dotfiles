@@ -29,42 +29,33 @@ bindkey -s ^n "tmux-sessionizer\n"
 source $HOME/.aliases
 
 # exports / tools
-export EDITOR=nvim
-export MANPAGER='nvim +Man!'
-
-# my scripts
+## my scripts
 export PATH=/home/lwi/.scripts:$PATH
 
-# rust
+## rust
 export PATH=$PATH:/home/lwi/.cargo/bin
 
-# go
+## go
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
 
-# java
-## java sway gui not rendering. Just getting a white window
+## java
+### java sway gui not rendering. Just getting a white window
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-# phpstorm
+## phpstorm
 export PATH=/home/lwi/.local/share/JetBrains/Toolbox/scripts:$PATH
 
-# Turso
+## Turso
 export PATH="/home/lwi/.turso:$PATH"
 
-# bun
+## bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-## bun completions
+### bun completions
 [ -s "/home/lwi/.bun/_bun" ] && source "/home/lwi/.bun/_bun"
 
-# QT high dpi behavior
-export QT_AUTO_SCREEN_SCALE_FACTOR=0
-export QT_SCALE_FACTOR=2
-
-# GDK high dpi behavior
-export GDK_DPI_SCALE=2
 
 # Evals
 eval "$(fnm env --use-on-cd --shell zsh)"
