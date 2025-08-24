@@ -12,17 +12,21 @@ set("n", "<C-l>", "<c-w><c-l>")
 
 --- quickfix
 set("n", "<M-j>", "<cmd>cnext<CR>")
-set("n", "<M-k>", "<cmd>cprev<CR>")
+set("n", "<M-k>", "<kjmd>cprev<CR>")
 
 -- split
 set("n", "<M-s>.", "<C-W>v")
 set("n", "<M-s>,", "<C-W>s>")
 
 -- tabs
-set("n", "<C-t>.", "<C-W>gf")
+set("n", "<leader>t.", "<C-W>gf")
 -- tab nav
-set("n", "<M-left>", "gT")
-set("n", "<M-right>", "gt")
+set("n", "<C-j>", "gT")
+set("n", "<C-k>", "gt")
+set("n", "<M-1>", "1gt")
+set("n", "<M-2>", "2gt")
+set("n", "<M-3>", "3gt")
+set("n", "<M-4>", "4gt")
 
 -- allow moving of higlighted code block
 set("v", "J", ":m '>+1<CR>gv=gv")

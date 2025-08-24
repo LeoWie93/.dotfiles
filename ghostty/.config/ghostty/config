@@ -8,14 +8,15 @@ font-feature=-liga, -calt, -dlig
 # Theme
 #theme="Kanagawa Wave"
 theme="/home/lwi/.dotfiles/themes/.themes/ghostty/kanagawa-me"
-background-opacity=1
+background-opacity=0.98
 background-blur=false
 
 # Mouse
 mouse-hide-while-typing=true
 
 # Window
-window-padding-y=0,0
+window-padding-x=8
+window-padding-y=8
 window-padding-balance=true
 window-decoration=none
 
