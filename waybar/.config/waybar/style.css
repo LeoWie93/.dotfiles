@@ -48,22 +48,32 @@ tooltip label {
 
 #workspaces button {
     all: unset;
-}
-
-#workspaces button label {
     padding: 0px 5px;
     color: white;
     font-weight: 400;
 }
 
-#workspaces button:last-child label {
+#workspaces button.active {
+    font-weight: 600;
+    /* text-decoration: underline; */
+    border-bottom: white 2px;
+    color: white;
+}
+
+#workspaces button.focused {
+    font-weight: 600;
+    background-color: white;
+    color: black;
+}
+
+#workspaces button:last-child {
     margin-right: 0;
 }
 
-#workspaces button.active label {
-    font-weight: 600;
-    text-decoration: underline;
-}
+/* #workspaces button.active label { */
+/*     font-weight: 600; */
+/*     text-decoration: underline; */
+/* } */
 
 #tray,
 #pulseaudio,
