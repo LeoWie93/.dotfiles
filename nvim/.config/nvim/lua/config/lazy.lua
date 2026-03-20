@@ -22,4 +22,4 @@ require("lazy").setup({
     change_detection = { notify = false, }
 })
 
-vim.cmd [[colorscheme kanagawa]]
+vim.cmd [[colorscheme kanagawa-wave]]

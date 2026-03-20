@@ -4,6 +4,7 @@ local set = vim.keymap.set
 -- vim.keymap.set("n", "<leader>ee", vim.cmd.Ex)
 
 -- nav
+set("i", "<C-l>", "<ESC>")
 --- splits
 set("n", "<C-H>", "<C-W><C-h>")
 set("n", "<C-j>", "<c-W><c-j>")

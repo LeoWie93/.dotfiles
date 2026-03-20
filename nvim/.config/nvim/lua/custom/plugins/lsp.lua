@@ -1,51 +1,52 @@
 return {
     {
-        "neovim/nvim-lspconfig",
-        dependencies = {
-            {
-                "folke/lazydev.nvim",
-                ft = "lua", -- only load on lua files
-                opts = {
-                    library = {
-                        -- See the configuration section for more details
-                        -- Load luvit types when the `vim.uv` word is found
-                        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-                    },
-                },
-            },
-        },
-        config = function()
-            vim.api.nvim_create_autocmd('LspAttach', {
-                callback = function(args)
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if not client then return end
-
-                    if client.supports_method('textDocument/formatting') then
-                        vim.api.nvim_create_autocmd('BufWritePre', {
-                            buffer   = args.buf,
-                            callback = function()
-                                vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
-                            end
-                        })
-                    end
-                end,
-            })
-        end,
-
-    },
-    {
         'williamboman/mason-lspconfig.nvim',
         version = "^2",
         dependencies = {
             {
                 'williamboman/mason.nvim',
                 version = "^2",
-            }
+            },
+            {
+                "neovim/nvim-lspconfig",
+                dependencies = {
+                    {
+                        "folke/lazydev.nvim",
+                        ft = "lua", -- only load on lua files
+                        opts = {
+                            library = {
+                                -- See the configuration section for more details
+                                -- Load luvit types when the `vim.uv` word is found
+                                { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+                            },
+                        },
+                    },
+                },
+                config = function()
+                    vim.api.nvim_create_autocmd('LspAttach', {
+                        callback = function(args)
+                            local client = vim.lsp.get_client_by_id(args.data.client_id)
+                            if not client then return end
+
+                            if client.supports_method('textDocument/formatting', args.buf) then
+                                vim.api.nvim_create_autocmd('BufWritePre', {
+                                    buffer   = args.buf,
+                                    callback = function()
+                                        vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+                                    end
+                                })
+                            end
+                        end,
+                    })
+                end,
+
+            },
         },
         opts = {
             automatic_enabled = false,
             ensure_installed = {
                 'bash-language-server',
+                'clangd',
                 'dockerls',
                 'docker_compose_language_service',
                 'eslint',
@@ -56,7 +57,7 @@ return {
                 'jsonls',
                 'lua_ls',
                 'lemminx',
-                'rust_analyzer',
+                'rust-analyzer',
                 'typescript-language-server',
                 'yamlls',
             }
@@ -96,6 +97,16 @@ return {
                                 completeUnimported = true,
                                 usePlaceholders = true,
                             }
+                        }
+                    }
+                elseif server_name == "ts_ls" then
+                    lspconfig.ts_ls.setup {
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                        settings = {
+                            implicitProjectConfiguration = {
+                                checkJs = true
+                            },
                         }
                     }
                 else
