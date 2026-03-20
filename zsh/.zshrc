@@ -8,7 +8,6 @@ SAVEHIST=10000
 autoload -Uz compinit && compinit
 ## sources
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # bindings
@@ -56,9 +55,13 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 ### bun completions
 [ -s "/home/lwi/.bun/_bun" ] && source "/home/lwi/.bun/_bun"
 
+## haskell
+export PATH=/home/lwi/.ghcup/bin:$PATH
+#export PATH=/home/lwi/.stack/bin:$PATH
+#export PATH=/home/lwi/.cabal/bin:$PATH
 
 # Evals
 eval "$(fnm env --use-on-cd --shell zsh)"
 eval "$(starship init zsh)"
 eval "$(atuin init zsh --disable-up-arrow)"
-
+eval "$(mise activate zsh)"
