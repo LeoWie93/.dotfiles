@@ -1,26 +1,20 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-# Read `man 5 sway` for a complete reference.
+# look at `man 5 sway` for references
 
-
-### Variables
+### VARIABLES
 set $mod Mod4
-# Home row direction keys, like vim
+
 set $left h 
 set $down j 
 set $up k 
 set $right l
 
-#set $term wezterm
 set $term ghostty
 set $menu wofi -i --show drun
 
-output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
-
+### DISPLAY
 set $laptop eDP-1
 output $laptop {
-    resolution 2880x1800@90Hz
+    resolution 2880x1800@120Hz
     scale 1
 }
 
@@ -29,19 +23,27 @@ output DP-1 {
     scale 1
 }
 
+output DP-7 {
+    resolution 3840x2160@60Hz
+    scale 1
+}
+
+output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
+
+### APPEARANCE
 gaps inner 0
 gaps outer 0
 
+default_border pixel 0
+default_floating_border pixel 1
+
+
+### LID CONFIGS
 bindswitch --reload --locked lid:on output $laptop disable
 bindswitch --reload --locked lid:off output $laptop enable
+#exec_always /home/lwi/.scripts/sway/lid.sh
 
-exec_always /home/lwi/.scripts/sway/lid.sh
-
-exec swayidle -w \
-         timeout 1000 'swaylock -f -c 000000' \
-         timeout 1600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
-
+### INPUT DEVICES
 input * {
     xkb_layout "ch"
 }
@@ -59,44 +61,31 @@ input type:touchpad {
     natural_scroll enabled
 }
 
-## windows
-default_border pixel 0
-default_floating_border pixel 1
 
+### KEY BINDINGS
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+space exec $menu
+#bindsym $mod+Alt+l exec wlogout
 
-### Key bindings
-#
-# Basics:
-#
-    # Start a terminal
-    bindsym $mod+Return exec $term
+bindsym $mod+Alt+p exec /home/lwi/.dotfiles/.scripts/.scripts/sway/output_switcher.sh
+bindsym $mod+Tab focus right
+bindsym $mod+Shift+Tab focus left
 
-    # Kill focused window
-    bindsym $mod+Shift+q kill
-    
-    # Start your launcher
-    bindsym $mod+space exec $menu
-     
-    #bindsym $mod+Alt+l exec wlogout
+bindsym $mod+Alt+l exec swaylock -f -c 000000
 
-    # display options
-    bindsym $mod+Alt+p exec /home/lwi/.dotfiles/.scripts/.scripts/sway/output_switcher.sh
+# Drag floating windows by holding down $mod and left mouse button.
+# Resize them with right mouse button + $mod.
+# Despite the name, also works for non-floating windows.
+# Change normal to inverse to use left mouse button for resizing and right
+# mouse button for dragging.
+floating_modifier $mod normal
 
-    bindsym $mod+Tab focus right
-    bindsym $mod+Shift+Tab focus left
+# Reload the configuration file
+bindsym $mod+Shift+c reload
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
-    floating_modifier $mod normal
-
-    # Reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -121,6 +110,7 @@ default_floating_border pixel 1
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
 #
 # Workspaces:
 #
@@ -148,6 +138,9 @@ default_floating_border pixel 1
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+    bindgesture swipe:right workspace prev
+    bindgesture swipe:left workspace next
 #
 # Layout stuff:
 #
@@ -210,8 +203,22 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-## Floating windows
+## Window rules
 for_window [app_id="org.keepassxc.KeePassXC"] floating enable
+for_window [app_id="blueman-manager"] floating enable
+for_window [app_id="nm-connection-editor"] floating enable
+for_window [app_id="org.pulseaudio.pavucontrol"] floating enable
+
+for_window [title="(Open File)(.*)$"] floating enable
+for_window [title="(Select a File)(.*)$"] floating enable
+for_window [title="(Choose wallpaper)(.*)$"] floating enable
+for_window [title="(Open Folder)(.*)$"] floating enable
+for_window [title="(Save As)(.*)$"] floating enable
+for_window [title="(Library)(.*)$"] floating enable
+for_window [title="(File Upload)(.*)$"] floating enable
+for_window [title="(.*)(wants to save)$"] floating enable
+for_window [title="(.*)(wants to open)$"] floating enable
+
 for_window [title="Huddle"] floating enable
 for_window [title="Welcome to PhpStorm"] floating enable
 
@@ -221,23 +228,40 @@ bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@
 bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle && dunstify -i ~/.config/dunst/assets/$(pactl get-sink-mute @DEFAULT_SINK@ | grep -q "yes" && echo "volume-mute.svg" || echo "volume.svg") -t 1000 -r 2593 "Toggle Mute"
 
 ## Brightness
-bindsym XF86MonBrightnessDown exec light -U 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
-bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
-##TODO replace light with brightnessctl
-#bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-#bindsym --locked XF87MonBrightnessUp exec brightnessctl set 5%+
+#bindsym XF86MonBrightnessDown exec light -U 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
+#bindsym XF86MonBrightnessUp exec light -A 5 && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
+bindsym XF86MonBrightnessUp exec brightnessctl --exponent=4 --min-value=2 set +5% && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
+bindsym XF86MonBrightnessDown exec brightnessctl --exponent=4 --min-value=2 set 5%-  && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
 
 ## General
 bindsym $mod+Alt+period exec grim -g "$(slurp)" - | swappy -f -
 bindsym $mod+Alt+minus exec grim -g "$(slurp)" - | tesseract stdin stdout | wl-copy
-
-## Autostart
-exec nm-applet &
-exec xremap ~/.config/xremap/config.yml
-exec solaar -w hide
 
 bar {
     swaybar_command waybar
 }
 
 include /etc/sway/config.d/*
+
+### AUTOSTART
+## Autostart
+exec nm-applet &
+exec sunsetr -b
+
+exec swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    timeout 600 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"' \
+    timeout 1200 'systemctl suspend-then-hibernate' \
+    before-sleep 'swaylock -f -c 000000'
+
+
+exec solaar -w hide
+#exec xremap ~/.config/xremap/config.yml
+
+workspace 8
+exec obsidian
+
+workspace 7
+exec zen-browser
+
