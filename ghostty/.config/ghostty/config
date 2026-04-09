@@ -1,7 +1,7 @@
 
 keybind = ctrl+alt+,=reload_config
 
-font-size=22
+font-size=16
 font-family="FiraCode Nerd Font Mono"
 font-feature=-liga, -calt, -dlig
 

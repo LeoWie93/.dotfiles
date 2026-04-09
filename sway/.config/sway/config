@@ -15,17 +15,22 @@ set $menu wofi -i --show drun
 set $laptop eDP-1
 output $laptop {
     resolution 2880x1800@120Hz
-    scale 1
+    scale 1.5
 }
 
 output DP-1 {
     resolution 3840x2160@60Hz
-    scale 1
+    scale 1.5
+}
+
+output DP-5 {
+    resolution 3840x2160@60Hz
+    scale 1.5
 }
 
 output DP-7 {
     resolution 3840x2160@60Hz
-    scale 1
+    scale 1.5
 }
 
 output * bg /home/lwi/Pictures/wallpapers/wallpaper.jpg fill
