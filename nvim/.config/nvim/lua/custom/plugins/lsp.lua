@@ -66,7 +66,27 @@ require('mason-lspconfig').setup({
     }
 })
 
---Lsp configurations
+vim.lsp.config('clangd', {
+    capabilities = {
+        offsetEncoding = { "utf-8", "utf-16" },
+        textDocument = {
+            completion = {
+                editsNearCursor = true
+            }
+        }
+    },
+    settings = {
+        clangd = {
+            FormatStyle = {
+                ColumnLimit = 120,
+                -- IndentWidth = 4,
+                -- TabWidth = 4,
+                -- UseTab = false,
+            }
+        }
+    }
+})
+
 vim.lsp.config('gopls', {
     settings = {
         gopls = {

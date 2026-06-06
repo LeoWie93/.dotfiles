@@ -46,3 +46,10 @@ require('custom.plugins.lsp')
 require('custom.plugins.completion')
 
 vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme catppuccin-nvim")
+
+-- require('catppuccin').setup({
+--     flavour = "mocha"
+-- })
+
+--vim.o.pumborder = 'single'

@@ -20,7 +20,8 @@ set("n", "<M-s>.", "<C-W>v")
 set("n", "<M-s>,", "<C-W>s>")
 
 -- tabs
-set("n", "<leader>t.", "<C-W>gf")
+set('n', '<leader>tn', '<cmd>tabnew<CR>', { noremap = true, silent = true, desc = "Open new tab" })
+set('n', '<leader>tn', '<cmd>tabclose<CR>', { noremap = true, silent = true, desc = "Close current tab" })
 -- tab nav
 set("n", "<C-j>", "gT")
 set("n", "<C-k>", "gt")
@@ -50,3 +51,14 @@ set("n", "<leader>Y", "\"+Y")
 
 set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gi<Left><Left><Left>")
 set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+
+set('n', '<leader>to', function()
+    -- Calculate 1/4th of the current editor height
+    local height = math.floor(vim.o.lines * 0.25)
+
+    -- Open a split at the bottom with the calculated height, then launch the terminal
+    vim.cmd('botright ' .. height .. 'split | terminal')
+
+    -- Automatically enter insert mode so you can start typing immediately
+    vim.cmd('startinsert')
+end, { noremap = true, silent = true, desc = "Open terminal in bottom 1/4th" })
