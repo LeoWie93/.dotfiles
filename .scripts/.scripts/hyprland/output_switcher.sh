@@ -12,7 +12,7 @@ if [ -z "$selected_name" ]; then
     exit
 fi
 
-isDisabled=$(hyprctl monitors all -j | jq -r --arg option "$selected_name" '.[] | select(.name == $option)' | jq -r '.disabled')
+isDisabled=$(hyprctl monitors all -j | jq -r --arg option "$selected_name" '.[]' | jq -r '.disabled')
 if test $isDisabled = "false"
 then
     menuOptions="resolutions\ndisable\n"
@@ -24,7 +24,7 @@ choosen=$(echo -e $menuOptions | wofi -i --dmenu)
 
 if test $choosen = "resolutions"; then
     resOptions=""
-    resolutions=$(hyprctl monitors all -j | jq -r --arg option "$selected_name" '.[] | select(.name == $option)' | jq -r '.availableModes')
+    resolutions=$(hyprctl monitors all -j | jq -r --arg option "$selected_name" '.[]' | jq -r '.availableModes')
 
     items=$(echo $resolutions | jq -c -r '.[]')
     for option in ${items[@]}; do
@@ -33,10 +33,10 @@ if test $choosen = "resolutions"; then
     done
 
     selected_resolution=$(echo -e $resOptions | wofi -i --dmenu)
-    hyprctl keyword monitor "${selected_name}, ${selected_resolution},,1"
+    hyprctl eval "hl.monitor({output = \"${selected_name}\", mode = ${selected_resolution},,scale = 1.5})"
 
     exit 0
 elif test "$choosen" = "disable"; then
-    hyprctl keyword monitor "${selected_name},disable"
+    hyprctl eval "hl.monitor({output = \"${selected_name}\",mode = \"disable\"})"
 fi
 

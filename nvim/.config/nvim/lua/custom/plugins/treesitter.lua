@@ -25,6 +25,7 @@ local opts = {
 local ensure_installed = {
     "bash",
     "c",
+    "cpp",
     "css",
     "diff",
     "dockerfile",

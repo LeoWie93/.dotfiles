@@ -3,8 +3,8 @@
     "position": "top",
     "reload_style_on_change": true,
     "modules-left": [
-        // "hyprland/workspaces",
-        "sway/workspaces",
+        "hyprland/workspaces",
+        //"sway/workspaces",
         "idle_inhibitor"
     ],
     "modules-center": [
@@ -33,7 +33,7 @@
     },
     "custom/lock": {
         "format": "",
-        "on-click": "swaylock"
+        "on-click": "hyprlock"
     },
     "sway/workspaces": {
         "disable-scroll": true,
@@ -41,7 +41,7 @@
         "format": "{name}"
     },
     "hyprland/workspaces": {
-        "disable-scroll": true,
+        "disable-scroll": false,
         "all-outputs": false,
         "format": "{name}",
         "show-special": true,

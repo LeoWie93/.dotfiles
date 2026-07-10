@@ -60,6 +60,9 @@ export PATH=/home/lwi/.ghcup/bin:$PATH
 #export PATH=/home/lwi/.stack/bin:$PATH
 #export PATH=/home/lwi/.cabal/bin:$PATH
 
+##C++
+export VCPKG_ROOT="$HOME/.local/share/vcpkg"
+
 # Evals
 eval "$(fnm env --use-on-cd --shell zsh)"
 eval "$(starship init zsh)"

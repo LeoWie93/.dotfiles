@@ -74,16 +74,6 @@ vim.lsp.config('clangd', {
                 editsNearCursor = true
             }
         }
-    },
-    settings = {
-        clangd = {
-            FormatStyle = {
-                ColumnLimit = 120,
-                -- IndentWidth = 4,
-                -- TabWidth = 4,
-                -- UseTab = false,
-            }
-        }
     }
 })
 
@@ -111,5 +101,5 @@ vim.diagnostic.config({
     update_in_insert = false,
     underline = true,
     severity_sort = false,
-    float = true,
+    on_jump = true,
 })

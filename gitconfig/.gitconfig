@@ -30,3 +30,5 @@
 	conflictStyle = zdiff3
 [pull]
     #rebase = true
+[core]
+	excludesfile = /home/lwi/.gitignore_global

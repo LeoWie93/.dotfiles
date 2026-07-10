@@ -21,7 +21,7 @@ set("n", "<M-s>,", "<C-W>s>")
 
 -- tabs
 set('n', '<leader>tn', '<cmd>tabnew<CR>', { noremap = true, silent = true, desc = "Open new tab" })
-set('n', '<leader>tn', '<cmd>tabclose<CR>', { noremap = true, silent = true, desc = "Close current tab" })
+set('n', '<leader>tc', '<cmd>tabclose<CR>', { noremap = true, silent = true, desc = "Close current tab" })
 -- tab nav
 set("n", "<C-j>", "gT")
 set("n", "<C-k>", "gt")

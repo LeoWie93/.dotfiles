@@ -8,7 +8,7 @@ font-feature=-liga, -calt, -dlig
 # Theme
 #theme="Kanagawa Wave"
 theme="/home/lwi/.dotfiles/themes/.themes/ghostty/kanagawa-me"
-background-opacity=1
+background-opacity=0.99
 background-blur=false
 
 # Mouse

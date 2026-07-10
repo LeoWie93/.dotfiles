@@ -55,15 +55,14 @@ tooltip label {
 
 #workspaces button.active {
     font-weight: 600;
-    /* text-decoration: underline; */
-    border-bottom: white 2px;
-    color: white;
+    color: black;
+    background-color: white;
 }
 
 #workspaces button.focused {
     font-weight: 600;
-    background-color: white;
     color: black;
+    background-color: white;
 }
 
 #workspaces button:last-child {
