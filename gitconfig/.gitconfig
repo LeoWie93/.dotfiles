@@ -32,3 +32,5 @@
     #rebase = true
 [core]
 	excludesfile = /home/lwi/.gitignore_global
+[credential]
+	helper = /usr/lib/git-core/git-credential-libsecret

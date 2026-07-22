@@ -4,6 +4,12 @@ require("hyprland/animations")
 hl.monitor({ output = "eDP-1", mode = "2880x1920@120", position = "0x0", scale = 1.5, })
 hl.monitor({ output = "DP-5", mode = "3840x2160@60", position = "2880x0", scale = 1.5, })
 
+hl.bind("switch:on:Lid Switch", hl.dsp.exec_cmd("lua /home/lwi/.scripts/hyprland/lid.lua"), { locked = true })
+
+hl.bind("switch:off:Lid Switch", function()
+    hl.monitor({ output = "eDP-1", disabled = false })
+end, { locked = true })
+
 -- programm variables
 ---@type string
 local terminal = "ghostty"
@@ -17,8 +23,9 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user start hyprpolkitagent")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
-    hl.exec_cmd("nm-applet & solaar -w hide")
-    hl.exec_cmd("waybar & hyprpaper")
+    hl.exec_cmd("solaar -w hide")
+    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("noctalia")
     hl.exec_cmd("zen-browser", { ["workspace"] = 7, ["no_initial_focus"] = true })
     hl.exec_cmd("obsidian", { ["workspace"] = 8, ["no_initial_focus"] = true })
 end)
@@ -235,10 +242,6 @@ hl.bind(
     "XF86MonBrightnessDown",
     hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),
     { locked = true, repeating = true })
-
-
---bindel = ,XF86MonBrightnessUp, exec, brightnessctl --exponent=4 --min-value=2 set +5% && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
--- bindel = ,XF86MonBrightnessDown, exec, brightnessctl --exponent=4 --min-value=2 set 5%-  && dunstify -h int:value:"$(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))"  -i ~/.config/dunst/assets/brightness.svg -t 1000 -r 2593 "Brightness: $(( ($(cat /sys/class/backlight/*/brightness) * 100) / $(cat /sys/class/backlight/*/max_brightness) ))%"
 
 -- Requires playerctl
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
