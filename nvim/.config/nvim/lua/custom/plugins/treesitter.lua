@@ -2,25 +2,9 @@ vim.pack.add({
     {
         src = "https://github.com/nvim-treesitter/nvim-treesitter",
         version = 'main',
-    }
-})
-
-local opts = {
-    auto_install = true,
-    highlight = {
-        enable = true,
-        -- maybe needed for php or ruby
-        additional_vim_regex_highlighting = false,
-        disable = function(lang, buf)
-            local max_filesize = 100 * 1024 -- 100 KB
-            local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-            if ok and stats and stats.size > max_filesize then
-                return true
-            end
-        end,
     },
-    indent = { enabled = true },
-}
+    "https://github.com/nvim-treesitter/nvim-treesitter-context",
+})
 
 local ensure_installed = {
     "bash",
@@ -52,18 +36,28 @@ local ensure_installed = {
 }
 
 local treesitter = require("nvim-treesitter")
-treesitter.setup(opts)
+treesitter.setup({
+    ensure_installed = ensure_installed,
+})
 
-local config = require("nvim-treesitter.config")
-local already_installed = config.get_installed()
-local parsers_to_install = {}
+-- Sticky Context Setup
+require('treesitter-context').setup({
+    enable = true,
+    max_lines = 3,
+    min_window_height = 0,
+    line_numbers = true,
+    multiline_threshold = 1,
+    trim_scope = 'outer',
+    mode = 'cursor',
+})
 
-for _, parser in ipairs(ensure_installed) do
-    if not vim.tbl_contains(already_installed, parser) then
-        table.insert(parsers_to_install, parser)
-    end
-end
+vim.keymap.set("n", "[c", function()
+    require("treesitter-context").go_to_context(vim.v.count1)
+end, { silent = true, desc = "Jump to parent function scope" })
 
-if #parsers_to_install > 0 then
-    treesitter.install(parsers_to_install)
-end
+-- Automatically start Treesitter syntax highlighting when opening files
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function(ev)
+        pcall(vim.treesitter.start, ev.buf)
+    end,
+})

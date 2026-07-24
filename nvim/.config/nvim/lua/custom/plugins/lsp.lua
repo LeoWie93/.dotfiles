@@ -3,16 +3,29 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/williamboman/mason.nvim",
     "https://github.com/williamboman/mason-lspconfig.nvim",
+    "https://github.com/hrsh7th/cmp-nvim-lsp",
 })
 
+-- Shared capabilities for nvim-cmp
+local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+local capabilities = vim.tbl_deep_extend(
+    "force",
+    vim.lsp.protocol.make_client_capabilities(),
+    has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+)
+
 -- LSP Attach
+local lsp_fmt_group = vim.api.nvim_create_augroup('LspFormatting', { clear = true })
+
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if not client then return end
 
         if client:supports_method('textDocument/formatting', ev.buf) then
+            vim.api.nvim_clear_autocmds({ group = lsp_fmt_group, buffer = ev.buf })
             vim.api.nvim_create_autocmd('BufWritePre', {
+                group    = lsp_fmt_group,
                 buffer   = ev.buf,
                 callback = function()
                     vim.lsp.buf.format({ bufnr = ev.buf, id = client.id })
@@ -21,21 +34,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
         end
 
         --keymaps
-        vim.keymap.set("n", "gd", '<cmd>lua vim.lsp.buf.definition()<cr>', { buffer = ev.buf })
-        vim.keymap.set("n", "gi", '<cmd>lua vim.lsp.buf.implementation()<cr>', { buffer = ev.buf })
-        vim.keymap.set("n", "gt", '<cmd>lua vim.lsp.buf.type_definition()<cr>', { buffer = ev.buf })
-        vim.keymap.set("n", "gr", '<cmd>lua vim.lsp.buf.references()<cr>', { buffer = ev.buf })
+        local opts = function(desc) return { buffer = ev.buf, desc = desc } end
 
-        vim.keymap.set("n", "<leader>gra", '<cmd>lua vim.lsp.buf.code_action()<cr>', { buffer = ev.buf })
-        vim.keymap.set("n", "<leader>rn", '<cmd>lua vim.lsp.buf.rename()<cr>', { buffer = ev.buf })
+        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts("Go to definition"))
+        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts("Go to implementation"))
+        vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, opts("Go to type definition"))
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts("Go to references"))
 
-        vim.keymap.set("n", "<leader>dk", '<cmd>lua vim.diagnostic.goto_prev()<cr>', { buffer = ev.buf })
-        vim.keymap.set("n", "<leader>dj", '<cmd>lua vim.diagnostic.goto_next()<cr>', { buffer = ev.buf })
-        vim.keymap.set("n", "<leader>dO", '<cmd>lua vim.diagnostic.open_float({scope = "line"})<cr>',
-            { buffer = ev.buf })
-        vim.keymap.set("n", "<leader>do", '<cmd>lua vim.diagnostic.open_float({scope = "cursor"})<cr>',
-            { buffer = ev.buf })
-        vim.keymap.set("n", "<leader>dt", '<cmd>Telescope diagnostics<cr>', { buffer = ev.buf })
+        vim.keymap.set("n", "<leader>gra", vim.lsp.buf.code_action, opts("Code actions"))
+        vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol"))
+
+        vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, opts("Previous diagnostic"))
+        vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, opts("Next diagnostic"))
+        vim.keymap.set("n", "<leader>dO", function() vim.diagnostic.open_float({ scope = "line" }) end,
+            opts("Line diagnostics"))
+        vim.keymap.set("n", "<leader>do", function() vim.diagnostic.open_float({ scope = "cursor" }) end,
+            opts("Cursor diagnostics"))
+        vim.keymap.set("n", "<leader>dt", '<cmd>Telescope diagnostics<cr>', opts("Telescope diagnostics"))
     end,
 })
 
@@ -66,15 +81,20 @@ require('mason-lspconfig').setup({
     }
 })
 
+-- Global defaults for ALL language servers
+vim.lsp.config('*', {
+    capabilities = capabilities,
+})
+
 vim.lsp.config('clangd', {
-    capabilities = {
+    capabilities = vim.tbl_deep_extend("force", capabilities, {
         offsetEncoding = { "utf-8", "utf-16" },
         textDocument = {
             completion = {
                 editsNearCursor = true
             }
         }
-    }
+    })
 })
 
 vim.lsp.config('gopls', {
@@ -100,6 +120,6 @@ vim.diagnostic.config({
     signs = true,
     update_in_insert = false,
     underline = true,
-    severity_sort = false,
+    severity_sort = true,
     on_jump = true,
 })

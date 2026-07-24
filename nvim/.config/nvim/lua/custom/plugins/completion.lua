@@ -20,9 +20,9 @@ lspkind.init {}
 local cmp = require('cmp')
 
 cmp.setup({
-    preselect = 'item',
+    preselect = cmp.PreselectMode.None,
     completion = {
-        completeopt = 'menu,menuone,noinsert',
+        completeopt = 'menu,menuone,noinsert,noselect',
     },
     snippet = {
         expand = function(args)
@@ -30,12 +30,12 @@ cmp.setup({
         end,
     },
     sources = cmp.config.sources({
+        { name = 'lazydev', group_index = 0 },
         { name = 'nvim_lsp' },
-        { name = 'path' },
-        { name = 'gopls' },
-        { name = 'buffer' },
         { name = 'luasnip' },
-        { name = 'lazydev' },
+        { name = 'path' },
+    }, {
+        { name = 'buffer', keyword_length = 3 },
     }),
     mapping = cmp.mapping.preset.insert({
         ['<C-y>'] = cmp.mapping(
