@@ -1,55 +1,56 @@
 vim.pack.add({
-    'https://github.com/hrsh7th/nvim-cmp',
-    'https://github.com/onsails/lspkind.nvim',
-    'https://github.com/hrsh7th/cmp-nvim-lsp',
-    'https://github.com/hrsh7th/cmp-buffer',
-    'https://github.com/hrsh7th/cmp-path',
-    'https://github.com/hrsh7th/cmp-nvim-lua',
-    'https://github.com/saadparwaiz1/cmp_luasnip',
+    {
+        src = 'https://github.com/Saghen/blink.lib',
+    },
+    {
+        src = 'https://github.com/Saghen/blink.cmp',
+        tag = "v1.*"
+    },
     {
         src = 'https://github.com/L3MON4D3/LuaSnip',
         tag = "v2.*",
-    }
+    },
 })
+local cmp = require('blink.cmp')
+cmp.build():pwait()
 
 vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
 
-local lspkind = require('lspkind')
-lspkind.init {}
-
-local cmp = require('cmp')
-
-cmp.setup({
-    preselect = cmp.PreselectMode.None,
+require('blink.cmp').setup({
+    keymap = {
+        preset = 'none',
+        ['<C-y>'] = { 'select_and_accept' },
+        ['<C-p>'] = { 'select_prev', 'fallback' },
+        ['<C-n>'] = { 'select_next', 'fallback' },
+        ['<C-u>'] = { 'scroll_documentation_up', 'fallback' },
+        ['<C-d>'] = { 'scroll_documentation_down', 'fallback' },
+    },
     completion = {
-        completeopt = 'menu,menuone,noinsert,noselect',
-    },
-    snippet = {
-        expand = function(args)
-            require('luasnip').lsp_expand(args.body)
-        end,
-    },
-    sources = cmp.config.sources({
-        { name = 'lazydev', group_index = 0 },
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
-        { name = 'path' },
-    }, {
-        { name = 'buffer', keyword_length = 3 },
-    }),
-    mapping = cmp.mapping.preset.insert({
-        ['<C-y>'] = cmp.mapping(
-            cmp.mapping.confirm {
-                behavior = cmp.ConfirmBehavior.Insert,
-                select = true
+        list = {
+            selection = {
+                preselect = false,
+                auto_insert = false,
             },
-            { "i", "c" }
-        ),
-        ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Select }),
-        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-d>'] = cmp.mapping.scroll_docs(4),
-    }),
+        },
+        documentation = {
+            auto_show = true,
+            auto_show_delay_ms = 50,
+        },
+    },
+    snippets = { preset = 'luasnip' },
+    sources = {
+        default = { 'lazydev', 'lsp', 'path', 'snippets', 'buffer' },
+        providers = {
+            lazydev = {
+                name = "LazyDev",
+                module = "lazydev.integrations.blink",
+                score_offset = 100,
+            },
+            buffer = {
+                min_keyword_length = 3,
+            },
+        },
+    },
 })
 
 -- snippets

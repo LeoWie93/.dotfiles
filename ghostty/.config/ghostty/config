@@ -7,17 +7,20 @@ font-feature=-liga, -calt, -dlig
 
 # Theme
 #theme="Kanagawa Wave"
-theme="/home/lwi/.dotfiles/themes/.themes/ghostty/kanagawa-me"
+theme = noctalia
 background-opacity=0.99
 background-blur=false
+
+# Cursor
+#custom-shader = ~/.config/ghostty/cursor_warp.glsl
 
 # Mouse
 mouse-hide-while-typing=true
 mouse-scroll-multiplier=precision:0.1,discrete:2
 
 # Window
-window-padding-x=10
-window-padding-y=10
+window-padding-x=5
+window-padding-y=5
 window-padding-balance=true
 window-decoration=none
 

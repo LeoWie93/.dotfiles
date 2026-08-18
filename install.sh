@@ -2,6 +2,7 @@
 
 STOW_FOLDERS=(
     "aliases"
+    "atuin"
     "bat"
     "dunst"
     "desktop_entries"
@@ -10,6 +11,7 @@ STOW_FOLDERS=(
     "gitconfig"
     "hypr"
     "nvim"
+    "noctalia-local"
     "paru"
     "starship"
     ".scripts"

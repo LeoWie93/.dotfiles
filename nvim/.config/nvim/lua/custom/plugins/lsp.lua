@@ -3,15 +3,14 @@ vim.pack.add({
     "https://github.com/neovim/nvim-lspconfig",
     "https://github.com/williamboman/mason.nvim",
     "https://github.com/williamboman/mason-lspconfig.nvim",
-    "https://github.com/hrsh7th/cmp-nvim-lsp",
 })
 
--- Shared capabilities for nvim-cmp
-local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+-- Shared capabilities for blink.cmp
+local has_blink, blink_cmp = pcall(require, 'blink.cmp')
 local capabilities = vim.tbl_deep_extend(
     "force",
     vim.lsp.protocol.make_client_capabilities(),
-    has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+    has_blink and blink_cmp.get_lsp_capabilities() or {}
 )
 
 -- LSP Attach
@@ -44,8 +43,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
         vim.keymap.set("n", "<leader>gra", vim.lsp.buf.code_action, opts("Code actions"))
         vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts("Rename symbol"))
 
-        vim.keymap.set("n", "<leader>dk", vim.diagnostic.goto_prev, opts("Previous diagnostic"))
-        vim.keymap.set("n", "<leader>dj", vim.diagnostic.goto_next, opts("Next diagnostic"))
+        vim.keymap.set("n", "<leader>dk", function() vim.diagnostic.jump({ count = -1 }) end, opts("Previous diagnostic"))
+        vim.keymap.set("n", "<leader>dj", function() vim.diagnostic.jump({ count = 1 }) end, opts("Next diagnostic"))
         vim.keymap.set("n", "<leader>dO", function() vim.diagnostic.open_float({ scope = "line" }) end,
             opts("Line diagnostics"))
         vim.keymap.set("n", "<leader>do", function() vim.diagnostic.open_float({ scope = "cursor" }) end,

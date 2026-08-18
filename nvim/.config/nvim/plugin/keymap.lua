@@ -18,8 +18,6 @@ set('n', '<leader>tn', '<cmd>tabnew<CR>', { noremap = true, silent = true, desc 
 set('n', '<leader>tc', '<cmd>tabclose<CR>', { noremap = true, silent = true, desc = "Close current tab" })
 
 -- tab nav
-set("n", "<C-j>", "gT")
-set("n", "<C-k>", "gt")
 set("n", "<M-1>", "1gt")
 set("n", "<M-2>", "2gt")
 set("n", "<M-3>", "3gt")
@@ -60,7 +58,9 @@ set('n', '<leader>th', function()
 end, { noremap = true, silent = true, desc = "Open terminal in bottom 1/4th" })
 
 set("n", "<leader>tv", "<cmd>vsplit | terminal<CR>a", { desc = "Vertical terminal split" })
-set("t", "<C-h>", "<C-\\><C-n><C-w>h", { desc = "Move to left split" })
-set("t", "<C-j>", "<C-\\><C-n><C-w>j", { desc = "Move to bottom split" })
-set("t", "<C-k>", "<C-\\><C-n><C-w>k", { desc = "Move to top split" })
-set("t", "<C-l>", "<C-\\><C-n><C-w>l", { desc = "Move to right split" })
+
+-- Split navigation (Normal & Terminal mode)
+set({ "n", "t" }, "<M-h>", "<C-\\><C-n><C-w>h", { desc = "Move to left split" })
+set({ "n", "t" }, "<M-j>", "<C-\\><C-n><C-w>j", { desc = "Move to bottom split" })
+set({ "n", "t" }, "<M-k>", "<C-\\><C-n><C-w>k", { desc = "Move to top split" })
+set({ "n", "t" }, "<M-l>", "<C-\\><C-n><C-w>l", { desc = "Move to right split" })

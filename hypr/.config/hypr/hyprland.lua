@@ -24,7 +24,6 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hypridle")
     hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
     hl.exec_cmd("solaar -w hide")
-    hl.exec_cmd("hyprpaper")
     hl.exec_cmd("noctalia")
     hl.exec_cmd("zen-browser", { ["workspace"] = 7, ["no_initial_focus"] = true })
     hl.exec_cmd("obsidian", { ["workspace"] = 8, ["no_initial_focus"] = true })
@@ -281,3 +280,6 @@ hl.window_rule({
 
     no_focus = true,
 })
+
+-- For Noctalia Color templates
+require("noctalia").apply_theme()

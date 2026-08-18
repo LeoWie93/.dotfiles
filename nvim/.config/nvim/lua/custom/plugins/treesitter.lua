@@ -4,6 +4,7 @@ vim.pack.add({
         version = 'main',
     },
     "https://github.com/nvim-treesitter/nvim-treesitter-context",
+    "https://github.com/rrethy/vim-illuminate"
 })
 
 local ensure_installed = {
@@ -35,8 +36,7 @@ local ensure_installed = {
     "yaml",
 }
 
-local treesitter = require("nvim-treesitter")
-treesitter.setup({
+require("nvim-treesitter").setup({
     ensure_installed = ensure_installed,
 })
 

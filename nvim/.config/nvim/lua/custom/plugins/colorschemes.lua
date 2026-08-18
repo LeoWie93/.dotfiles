@@ -3,9 +3,15 @@ vim.pack.add({
     'https://github.com/catppuccin/nvim'
 })
 
+require('catppuccin').setup({
+    background = { -- :h background
+        light = "latte",
+        dark = "mocha",
+    },
+})
+
 require('kanagawa').setup({
     compile = true,
-    theme = "wave",    -- Load "wave" theme
     background = {     -- map the value of 'background' option to a theme
         dark = "wave", -- try "dragon" !
         light = "lotus"
