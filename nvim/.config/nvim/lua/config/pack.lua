@@ -11,11 +11,6 @@ vim.api.nvim_create_autocmd('PackChanged', {
             vim.cmd('TSUpdate')
         end
 
-        -- if (name == 'blink.cmp' or name == 'blink') and (kind == 'update' or kind == 'install') then
-        --     ---@diagnostic disable-next-line: undefined-field
-        --     require('blink.cmp').build():pwait()
-        -- end
-
         if name == 'kanagawa' and (kind == 'update' or kind == 'install') then
             vim.cmd('KanagawaCompile')
         end
@@ -64,3 +59,5 @@ require('custom.plugins.git')
 
 vim.cmd("colorscheme kanagawa")
 -- vim.cmd("colorscheme catppuccin-nvim")
+
+vim.o.winborder = "bold"

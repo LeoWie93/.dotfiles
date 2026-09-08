@@ -115,10 +115,9 @@ vim.lsp.config('ts_ls', {
 
 -- Diagnostic
 vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false,
-    underline = true,
     severity_sort = true,
-    on_jump = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    virtual_text = true,
 })
